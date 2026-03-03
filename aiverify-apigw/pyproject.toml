@@ -34,6 +34,9 @@ dependencies = [
   "pydantic==2.*",
   "openapi-spec-validator==0.*",
   "valkey[libvalkey]==6.*",
+
+  # constraint sub-dependencies versions due to vulnerabilities
+  "urllib3~=2.6.3"
 ]
 
 [project.optional-dependencies]
