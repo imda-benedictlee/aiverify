@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 // Define APIGW_HOST at the top of the file
 const APIGW_HOST = process.env.APIGW_HOST || 'http://127.0.0.1:4000';
 // console.log('APIGW_HOST', APIGW_HOST);
 
 async function _backendFetch(
-  request: Request,
+  request: NextRequest,
   method: string,
   slug?: string[] | undefined
 ) {
@@ -65,41 +65,41 @@ async function _backendFetch(
 }
 
 export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ slug: string[] }> }
+  request: NextRequest,
+  context: { params: Promise<{ slug?: string[] }> }
 ) {
-  const { slug } = await params;
+  const { slug } = await context.params;
   return _backendFetch(request, 'GET', slug);
 }
 
 export async function POST(
-  request: Request,
-  { params }: { params: Promise<{ slug: string[] }> }
+  request: NextRequest,
+  context: { params: Promise<{ slug?: string[] }> }
 ) {
-  const { slug } = await params;
+  const { slug } = await context.params;
   return _backendFetch(request, 'POST', slug);
 }
 
 export async function PUT(
-  request: Request,
-  { params }: { params: Promise<{ slug: string[] }> }
+  request: NextRequest,
+  context: { params: Promise<{ slug?: string[] }> }
 ) {
-  const { slug } = await params;
+  const { slug } = await context.params;
   return _backendFetch(request, 'PUT', slug);
 }
 
 export async function PATCH(
-  request: Request,
-  { params }: { params: Promise<{ slug: string[] }> }
+  request: NextRequest,
+  context: { params: Promise<{ slug?: string[] }> }
 ) {
-  const { slug } = await params;
+  const { slug } = await context.params;
   return _backendFetch(request, 'PATCH', slug);
 }
 
 export async function DELETE(
-  request: Request,
-  { params }: { params: Promise<{ slug: string[] }> }
+  request: NextRequest,
+  context: { params: Promise<{ slug?: string[] }> }
 ) {
-  const { slug } = await params;
+  const { slug } = await context.params;
   return _backendFetch(request, 'DELETE', slug);
 }
