@@ -71,6 +71,6 @@
   },
   "overrides": {
     "@babel/runtime": "^7.26.10",
-    "serialize-javascript": "^6.0.2"
+    "serialize-javascript": "^7.0.2"
   }
 }
