@@ -36,7 +36,8 @@ dependencies = [
   "valkey[libvalkey]==6.*",
 
   # constraint sub-dependencies versions due to vulnerabilities
-  "urllib3~=2.6.3"
+  "urllib3~=2.6.3",
+  "keras>=3.13.2",  # Security fix: addresses CVE-2025-12060, CVE-2025-12638, CVE-2025-12058, CVE-2026-0897, CVE-2026-1669
 ]
 
 [project.optional-dependencies]
