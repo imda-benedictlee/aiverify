@@ -5,7 +5,6 @@ authors = [{ name = "AI Verify" }]
 description = "AI Verify Test Engine provides core interfaces, converters, data, model and plugin managers to facilitate the development of tests for AI systems. It is used as a base library for all AI Verify official stock-plugins and can be used to develop custom plugins."
 dependencies = [
     "joblib==1.4.2",
-    "pillow==10.4.0",
     "libclang==16.0.6",
     "numpy==1.26.4",
     "scikit-learn==1.5.2",
@@ -60,6 +59,7 @@ dev = [
     "pytest-html==4.1.1",
     "hatch==1.12.0",
     "anybadge==1.14.0",
+    "pillow>=12.1.1",  # Security fix: addresses CVE-2026-25990
 ]
 
 [tool.ruff.lint]
