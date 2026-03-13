@@ -37,7 +37,14 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-tensorflow = ["tensorflow>=2.18.0"]
+tensorflow = [
+    "tensorflow>=2.18.0",
+
+    # Sub-dependecy 
+    "keras>=3.12.1", # addresses CVE-2025-12058, CVE-2025-12060, CVE-2026-0897, CVE-2026-1669
+    "werkzeug>=3.1.6",  # addresses CVE-2025-66221, CVE-2026-21860, CVE-2026-27199
+    "protobuf>=6.33.5" # addresses CVE-2026-0994
+    ]
 
 gbm = ["lightgbm>=4.6.0", "xgboost==2.1.1"]
 
@@ -63,6 +70,10 @@ dev = [
     "hatch==1.12.0",
     "anybadge==1.14.0",
     "pillow>=12.1.1",  # Security fix: addresses CVE-2026-25990
+
+    # Sub-dependecy 
+    "jaraco-context>=6.1.0", # addresses CVE-2026-23949
+    "uv>=0.9.6"  # addresses GHSA-w476-p2h3-79g9, CVE-2025-13327
 ]
 
 [tool.ruff.lint]
