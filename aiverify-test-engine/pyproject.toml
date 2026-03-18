@@ -5,24 +5,25 @@ authors = [{ name = "AI Verify" }]
 description = "AI Verify Test Engine provides core interfaces, converters, data, model and plugin managers to facilitate the development of tests for AI systems. It is used as a base library for all AI Verify official stock-plugins and can be used to develop custom plugins."
 dependencies = [
     "joblib==1.4.2",
-    "pillow==10.4.0",
     "libclang==16.0.6",
     "numpy==1.26.4",
     "scikit-learn==1.5.2",
     "pandas==2.2.2",
     "scipy==1.14.1",
-    "httpx==0.26.0",
-    "openapi-schema-validator==0.6.2",
+    "openapi-schema-validator~=0.7.3",
     "aiometer==0.5.0",
     "async-timeout==4.0.3",
     "attrs==23.2.0",
-    "jsonschema-specifications==2023.12.1",
-    "jsonschema==4.21.1",
-    "referencing==0.33.0",
-    "rpds-py==0.17.1",
+    "jsonschema-specifications~=2024.10.1",
+    "jsonschema~=4.24",
+    "referencing~=0.37.0",
+    "rpds-py~=0.25.1",
     "setuptools>=78.1.1",
     "requests>=2.32.4",
     "pydantic==2.*",
+
+    # Sub-dependency security fix
+    "urllib3>=2.6.3"  # addresses CVE-2025-66418, CVE-2025-66471, CVE-2026-21441
 ]
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
@@ -36,11 +37,18 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-tensorflow = ["tensorflow>=2.18.0"]
+tensorflow = [
+    "tensorflow>=2.18.0",
+
+    # Sub-dependecy 
+    "keras>=3.12.1", # addresses CVE-2025-12058, CVE-2025-12060, CVE-2026-0897, CVE-2026-1669
+    "werkzeug>=3.1.6",  # addresses CVE-2025-66221, CVE-2026-21860, CVE-2026-27199
+    "protobuf>=6.33.5" # addresses CVE-2026-0994
+    ]
 
 gbm = ["lightgbm>=4.6.0", "xgboost==2.1.1"]
 
-pytorch = ["torch>=2.0", "torchvision>=0.15.0"]
+pytorch = ["torch>=2.10", "torchvision>=0.15.0"]
 
 all = [
     "aiverify-test-engine[tensorflow]",
@@ -61,6 +69,11 @@ dev = [
     "pytest-html==4.1.1",
     "hatch==1.12.0",
     "anybadge==1.14.0",
+    "pillow>=12.1.1",  # Security fix: addresses CVE-2026-25990
+
+    # Sub-dependecy 
+    "jaraco-context>=6.1.0", # addresses CVE-2026-23949
+    "uv>=0.9.6"  # addresses GHSA-w476-p2h3-79g9, CVE-2025-13327
 ]
 
 [tool.ruff.lint]
