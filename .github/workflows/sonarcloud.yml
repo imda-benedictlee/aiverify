@@ -42,19 +42,20 @@ jobs:
 
       - name: Install Sonarcloud
         run: |
-          curl --create-dirs -sSLo $GITHUB_WORSPACE/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${{ vars.SONAR_SCANNER_VERSION }}-linux-x64.zip
-          unzip -o $GITHUB_WORSPACE/.sonar/sonar-scanner.zip -d $HOME/.sonar/
+          curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${{ vars.SONAR_SCANNER_VERSION }}-linux-x64.zip
+          unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
           export PATH=$SONAR_SCANNER_HOME/bin:$PATH
-          echo $PATH
-          # echo "{path}" >> $GITHUB_PATH
-
-      - name: Sonarcloud Scan
-        run: |
           sonar-scanner \
             -Dsonar.organization=${{ secrets.SONAR_ORGANISATION }} \
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
 
-      # - name: Install APIGW
+      # - name: Sonarcloud Scan
+      #   run: |
+      #     sonar-scanner \
+      #       -Dsonar.organization=${{ secrets.SONAR_ORGANISATION }} \
+      #       -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+
+      # # - name: Install APIGW
       #   run: |
       #       cd aiverify-apigw
       #       python3 -m venv .venv
