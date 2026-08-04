@@ -47,13 +47,19 @@ jobs:
           export PATH=$SONAR_SCANNER_HOME/bin:$PATH
           echo "{path}" >> $GITHUB_PATH
 
-      - name: Install APIGW
+      - name: Sonarcloud Scan
         run: |
-            cd aiverify-apigw
-            python3 -m venv .venv
-            source .venv/bin/activate
-            pip install .
-            pip freeze > requirements.txt
+          sonar-scanner \
+            -Dsonar.organization=${{ secrets.SONAR_ORGANISATION }} \
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+
+      # - name: Install APIGW
+      #   run: |
+      #       cd aiverify-apigw
+      #       python3 -m venv .venv
+      #       source .venv/bin/activate
+      #       pip install .
+      #       pip freeze > requirements.txt
 
       # - name: Sonarcloud Scan
       #   # id: polaris-sca-scan-apigw
@@ -80,10 +86,10 @@ jobs:
       #     ### Mark build status if policy violating issues are found
       #     mark_build_status: "success"
 
-      - name: Cleanup APIGW
-        run: |
-            rm -rf .venv
-            cd ${GITHUB_WORKSPACE}
+      # - name: Cleanup APIGW
+      #   run: |
+      #       rm -rf .venv
+      #       cd ${GITHUB_WORKSPACE}
 
   # Sonarcloud-Scan:
 
