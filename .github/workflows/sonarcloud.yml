@@ -40,13 +40,13 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install Sonarcloud
+      - name: Install Sonarcloud & Scan
         run: |
           export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-${{ vars.SONAR_SCANNER_VERSION }}-linux-x64
           curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${{ vars.SONAR_SCANNER_VERSION }}-linux-x64.zip
           unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
-          export PATH=$SONAR_SCANNER_HOME/bin:$PATH
-          echo "{path}" >> $GITHUB_PATH
+          echo "$SONAR_SCANNER_HOME/bin:$PATH" >> $GITHUB_PATH
+          # echo "{path}" >> $GITHUB_PATH
 
       - name: Sonarcloud Scan
         env:
