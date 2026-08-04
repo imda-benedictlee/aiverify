@@ -12,7 +12,7 @@ on:
 
 # Allow one concurrent deployment
 concurrency:
-  group: ${{ github.repository }}-${{ github.workflow }}
+  group: Sonarcloud
   cancel-in-progress: true
 
 jobs:
@@ -23,10 +23,7 @@ jobs:
     permissions:
       contents: write
       security-events: write
-
-    concurrency:
-      group: Sonarcloud
-
+      
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -35,10 +32,10 @@ jobs:
           repository: aiverify-foundation/aiverify
           submodules: recursive
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      # - name: Set up Python 3.11
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: "3.11"
 
       - name: Install Sonarcloud & Scan
         run: |
@@ -46,7 +43,6 @@ jobs:
           curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${{ vars.SONAR_SCANNER_VERSION }}-linux-x64.zip
           unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
           echo "$SONAR_SCANNER_HOME/bin:$PATH" >> $GITHUB_PATH
-          # echo "{path}" >> $GITHUB_PATH
 
       - name: Sonarcloud Scan
         env:
