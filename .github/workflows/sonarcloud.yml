@@ -42,6 +42,7 @@ jobs:
 
       - name: Install Sonarcloud
         run: |
+          export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-${{ vars.SONAR_SCANNER_VERSION }}-linux-x64
           curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${{ vars.SONAR_SCANNER_VERSION }}-linux-x64.zip
           unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
           export PATH=$SONAR_SCANNER_HOME/bin:$PATH
