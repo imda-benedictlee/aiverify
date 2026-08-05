@@ -47,8 +47,5 @@ jobs:
             -Dsonar.organization=${{ secrets.SONAR_ORGANISATION }} \
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
             -Dsonar.sources=$GITHUB_WORKSPACE \
-            -Dsonar.python.version=${{ vars.PYTHON_VERSION }} \
-            -Dsonar.tests=aiverify-apigw/tests,
-                          aiverify-test-engine-worker/tests,
-                          aiverify-test-engine/tests
+            -Dsonar.python.version=${{ vars.PYTHON_VERSION }}
             
