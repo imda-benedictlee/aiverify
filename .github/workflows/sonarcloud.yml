@@ -30,6 +30,7 @@ jobs:
           ref: main
           repository: aiverify-foundation/aiverify
           submodules: recursive
+          fetch-depth: 0
 
       - name: Install Sonarcloud
         run: |
@@ -45,4 +46,9 @@ jobs:
           sonar-scanner \
             -Dsonar.organization=${{ secrets.SONAR_ORGANISATION }} \
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
-            -Dsonar.sources=$GITHUB_WORKSPACE
+            -Dsonar.sources=$GITHUB_WORKSPACE \
+            -Dsonar.python.version=${{ vars.PYTHON_VERSION }} \
+            -Dsonar.tests=$GITHUB_WORKSPACE/aiverify-apigw/tests,
+                          $GITHUB_WORKSPACE/aiverify-test-engine-worker/tests,
+                          $GITHUB_WORKSPACE/aiverify-test-engine/tests,
+            
