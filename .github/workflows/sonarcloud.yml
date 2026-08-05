@@ -43,7 +43,6 @@ jobs:
           curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${{ vars.SONAR_SCANNER_VERSION }}-linux-x64.zip
           unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
           echo "$SONAR_SCANNER_HOME/bin:$PATH" >> $GITHUB_PATH
-          ls -la
 
       - name: Sonarcloud Scan
         env:
@@ -51,7 +50,8 @@ jobs:
         run: |
           sonar-scanner \
             -Dsonar.organization=${{ secrets.SONAR_ORGANISATION }} \
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
+            -Dsonar.sources=$GITHUB_WORKSPACE
 
       # # - name: Install APIGW
       #   run: |
